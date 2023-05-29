@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %} Home page {% endblock %} {% block
+content %}
+<h1>Todo List</h1>
+<div class="containre-md">
+	<div class="row">
+		{% for todoTask in todoList %}
+			<div class="col-sm-6 mt-3 mb-sm-0">
+				<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">{{ todoTask }}</h5>
+					<p class="card-text">{{ todoTask.description }}</p>
+					<a href="#" class="btn btn-primary">Go somewhere</a>
+				</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

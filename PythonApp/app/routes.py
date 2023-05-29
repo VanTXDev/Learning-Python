@@ -1,13 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-from datetime import timedelta
-
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "keystone"
-app.permanent_session_lifetime = timedelta(minutes=1)
+from flask import render_template, request, redirect, url_for, session
+from app import app
+from app import db
 
 @app.route("/")
-def hello_world():
-	return render_template("home.html") 
+def index():
+	sql = "SELECT * FROM `todo_list`"
+	c=db.cursor()
+	c.execute(sql)
+	print (type(c))
+	print (c)
+	for row in c:
+		print (row)
+	return render_template("home.html", todoList=c) 
 
 @app.route("/user")
 def user():
@@ -34,5 +38,6 @@ def logout():
 		session.pop("username", None)
 		return redirect(url_for("login"))
 
-if __name__ == "__main__":
-	app.run(debug=True)
+@app.route('/todo')
+def todo():
+	return render_template("todo.html")
