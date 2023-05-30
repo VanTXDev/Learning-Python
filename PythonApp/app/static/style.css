@@ -83,3 +83,7 @@ input[type="text"], input[type="submit"]{
 	background-color: rgb(76, 241, 0);
 	border-color: rgb(76, 241, 0);
 }
+.task-completed {
+	background-color: #101810f2;
+	color: #fafafa;
+}

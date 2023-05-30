@@ -13,41 +13,20 @@
 		{% for todoTask in todoList %}
 			<div class="col-sm-6 mt-3 mb-sm-0">
 				<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">{{ todoTask.1 }}</h5>
-					<p class="card-text">{{ todoTask.2 }}</p>
-					{% if todoTask.3 == "1": %}
-						<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" name="is_completed{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}" checked>
-					{% else: %}  
-						<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" name="is_completed{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}">
-					{% endif %}
-					<label for="is_completed{{ todoTask.0 }}">Completed</label>
-				</div>
+					<div class="card-body">
+						<h5 class="card-title">{{ todoTask.1 }}</h5>
+						<p class="card-text">{{ todoTask.2 }}</p>
+						{% if todoTask.3 == 1: %}
+							<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" name="is_completed{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}" checked>
+						{% else: %}  
+							<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" name="is_completed{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}">
+						{% endif %}
+						<label for="is_completed{{ todoTask.0 }}">Completed</label>
+					</div>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
 </div>
-<script>
-	$(document).ready(function() {
-		$(".ckb-completed").click(function(e) {
-			e.preventDefault();
-			var isCompleted = $(this).val()
-			setCompleteStatus(isCompleted)
-		});
-	})
-	function setCompleteStatus(isCompleted) {
-		$.ajax({
-			url: "/set_complete",
-			method: "POST",
-			contentType: "application/json",
-			data: {
-				"is_completed": isCompleted
-			},
-			success: function(response) {
-				console.log(response);
-			}
-		});
-	}
-</script>
+<script src="../static/main.js" type="text/javascript" ></script>
 {% endblock %}

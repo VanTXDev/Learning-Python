@@ -8,10 +8,6 @@ def index():
 	c=db.cursor()
 	c.execute(sql)
 	result = c.fetchall()
-	print (type(result))
-	print (result)
-	for row in result:
-		print (row)
 	return render_template("home.html", todoList=result) 
 
 @app.route("/user")
@@ -55,6 +51,12 @@ def todo():
 
 @app.route('/set_complete', methods=['POST'])
 def set_completed():
-	print("Setting completed: " + request.get_json())
-	data = {"hello": "world"}
+	isCompleted = bool(request.json['is_completed'])
+	taskId = int(request.json['task_id'])
+
+	cur=db.cursor()
+	cur.execute("UPDATE todo_list set is_completed = (%s) WHERE id = (%s)", (isCompleted, taskId))
+	db.commit()
+	cur.close()
+	data = {"is_completed": isCompleted, "task_id": taskId}
 	return jsonify(data)
