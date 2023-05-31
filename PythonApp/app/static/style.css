@@ -63,7 +63,7 @@ input[type="text"], input[type="submit"]{
 	margin-bottom: 10px;
 }
 
-#login-btn{
+#login-btn, #submit-btn {
 	width: 100px;
 	border-radius: 5px;
 	background-color: #a5e1482b;
@@ -76,7 +76,7 @@ input[type="text"], input[type="submit"]{
 	text-align: center;
   	margin: 0 auto;
 }
-#login-btn:hover{
+#login-btn:hover, #submit-btn:hover{
 	background-color: #7ecf005c;
 }
 .form-check-input:checked{
@@ -86,4 +86,26 @@ input[type="text"], input[type="submit"]{
 .task-completed {
 	background-color: #101810f2;
 	color: #fafafa;
+	border-radius: var(--bs-card-border-radius);
+}
+.btn-add-task{
+	border-radius: 8px;
+}
+.btn-add-task:hover {
+	box-shadow: 0px 0px 6px 3px #e5e5e5;
+	border: 1px #dddada solid;
+	transition: all 1s linear infinite;
+}
+.ckb-completed, .card-body label{
+	cursor: pointer;
+}
+.gr-icon {
+	width: 180px;
+	height: 30px;
+}
+.ic-fun{
+	vertical-align: top;
+}
+.ic-func:hover{
+	font-size: larger;
 }

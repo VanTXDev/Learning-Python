@@ -3,21 +3,15 @@
 
 {% block content %}
 	<h2>Create Todo Task</h2>
-	<form action="#" method="POST" name="todo-frm" class="was-validated">
+	<form action="#" method="POST" name="todo-frm">
 		<label for="title">Title</label>
 		<div class="input-group has-validation">
-			<input type="text" name="title" value="" id="title" class="form-control is-invalid" required>
-			<div id="titleFeedback" class="invalid-feedback">
-				Please provide task title.
-			</div>
+			<input type="text" name="title" value="" id="title" class="form-control">
 		</div>
 		<div class="mb-3">
 			<label for="description">Description</label>
-			<textarea type="text" name="description" value="" id="description" class="form-control" required></textarea>
-			<div class="invalid-feedback">
-				Please provide task description.
-			</div>
+			<textarea type="text" name="description" value="" id="description" class="form-control"></textarea>
 		</div>
-		<input type="submit" value="Submit" id="login-btn" class="mt-3">
+		<input type="submit" value="Submit" id="submit-btn" class="mt-3">
 	</form>
 {% endblock %}

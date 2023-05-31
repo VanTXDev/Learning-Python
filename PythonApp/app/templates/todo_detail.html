@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} Task Detail page {% endblock %}
+
+{% block content %}
+	<h2>Task Detail</h2>
+	<form action="#" method="POST" name="todo-update-frm">
+		<input type="hidden" name="task_id" value="{{ taskDetail.0 }}">
+		<label for="title">Title</label>
+		<div class="input-group has-validation">
+			<input type="text" name="title" value="{{ taskDetail.1 }}" id="title" class="form-control">
+		</div>
+		<div class="mb-3">
+			<label for="description">Description</label>
+			<textarea type="text" name="description" id="description" class="form-control">{{ taskDetail.2 }}</textarea>
+		</div>
+		{% if taskDetail.3 == 1: %}
+			<input type="checkbox" value="{{ taskDetail.3 }}" class="form-check-input ckb-completed" name="is_completed" id="is_completed{{ taskDetail.0 }}" checked>
+		{% else: %}  
+			<input type="checkbox" value="{{ taskDetail.3 }}" class="form-check-input ckb-completed" name="is_completed" id="is_completed{{ taskDetail.0 }}">
+		{% endif %}
+		<label for="is_completed{{ taskDetail.0 }}">Completed</label>
+		<input type="submit" value="Update" id="submit-btn" class="mt-3">
+	</form>
+{% endblock %}
