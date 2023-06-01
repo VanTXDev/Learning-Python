@@ -37,17 +37,22 @@ def logout():
 
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
-	if request.method == 'POST':
-		title = request.form['title']
-		description = request.form['description']
-		is_completed = '0'
+	if "username" in session:
+		if request.method == 'POST':
+			title = request.form['title']
+			description = request.form['description']
+			creator = request.form['creator']
+			is_completed = '0'
 
-		cur=db.cursor()
-		cur.execute("INSERT INTO todo_list(title, description, is_completed) VALUES (%s, %s, %s)", (title, description, is_completed))
-		db.commit()
-		cur.close()
-		return redirect(url_for("index"))
-	return render_template("todo.html")
+			cur=db.cursor()
+			cur.execute("INSERT INTO todo_list(title, description, is_completed, creator) VALUES (%s, %s, %s, %s)", (title, description, is_completed, creator))
+			db.commit()
+			cur.close()
+			return redirect(url_for("index"))
+		return render_template("todo.html")
+	else:
+		return redirect(url_for("login"))
+	
 
 @app.route('/set_complete', methods=['POST'])
 def set_complete():

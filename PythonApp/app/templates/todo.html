@@ -4,6 +4,7 @@
 {% block content %}
 	<h2>Create Todo Task</h2>
 	<form action="#" method="POST" name="todo-frm">
+		<input type="hidden" name="creator" value="{{ session['username'] }}">
 		<label for="title">Title</label>
 		<div class="input-group has-validation">
 			<input type="text" name="title" value="" id="title" class="form-control">
