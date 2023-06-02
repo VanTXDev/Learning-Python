@@ -109,3 +109,9 @@ input[type="text"], input[type="submit"]{
 .ic-func:hover{
 	font-size: larger;
 }
+#description{
+	height: 200px;
+}
+.card:hover{
+	box-shadow: 0px 0px 10px 5px #bebebe;
+}

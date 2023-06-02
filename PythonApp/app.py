@@ -1,6 +1,18 @@
-from flask import render_template, request, redirect, url_for, session, jsonify
-from app import app
-from app import db
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from datetime import timedelta
+from conf import SECRET_KEY
+import MySQLdb
+import MySQLdb.cursors
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = SECRET_KEY
+app.permanent_session_lifetime = timedelta(minutes=360)
+
+# config mysql connection
+db=MySQLdb.connect( host='localhost',
+        user='root',
+        password='',
+        database='todo', cursorclass=MySQLdb.cursors.SSCursor)
 
 @app.route("/")
 def index():
@@ -19,9 +31,6 @@ def user():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-	if "username" in session:
-		return redirect(url_for("user"))
-
 	if request.method == 'POST':
 		username = request.form['username']
 		if username:
@@ -66,8 +75,8 @@ def set_complete():
 		db.commit()
 		cur.close()
 		data = {"status": "true", "is_completed": isCompleted, "task_id": taskId, "message": "Update task status successfully!"}
-	except Exception:
-		print (Exception)
+	except OSError:
+		pass
 		data  = {"status": "false", "message": "Update task status failed!"}
 	return jsonify(data)
 
@@ -92,8 +101,8 @@ def todo_detail(taskId):
 		cur.execute("UPDATE todo_list SET title = (%s), description = (%s), is_completed = (%s) WHERE id = (%s)", (title, description, is_completed, taskId))
 		db.commit()
 		cur.close()
-	except Exception:
-		print (Exception)
+	except OSError:
+		pass
 	return redirect(url_for("index"))
 
 @app.route("/delete_task", methods=["POST"])
@@ -110,3 +119,6 @@ def delete_task():
 		print (Exception)
 		data  = {"status": "false", "message": "Delete task failed!"}
 	return jsonify(data)
+
+if __name__ == '__main__':
+	app.run(debug=True)

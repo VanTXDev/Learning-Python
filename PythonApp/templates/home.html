@@ -15,13 +15,17 @@
 				<div class="card">
 					<div class="card-body is_completed{{ todoTask.0 }}">
 						<h5 class="card-title">{{ todoTask.1 }}</h5>
-						<p class="card-text">{{ todoTask.2 }}</p>
+						{% if todoTask.2|length > 200: %}
+							{% set strDescription = todoTask.2[:200]  ~ "..." %}
+						{% else %}
+							{% set strDescription = todoTask.2 %}
+						{% endif %}
+						<p class="card-text ">{{ strDescription }}</p>
 						<div class="gr-icon mx-auto">
 							{% if todoTask.3 == 1: %}
-								<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" data-task-id="{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}" checked>
-							{% else: %}  
-								<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" data-task-id="{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}">
+								{% set isChecked = "checked" %}
 							{% endif %}
+							<input type="checkbox" value="{{ todoTask.3 }}" class="form-check-input ckb-completed" data-task-id="{{ todoTask.0 }}" id="is_completed{{ todoTask.0 }}" {{ isChecked }}>
 							<label for="is_completed{{ todoTask.0 }}">Completed</label>
 							<a href="/todo/{{ todoTask.0 }}" class="px-3 text-warning ic-func"><i class="bi bi-pencil-square"></i></a>
 							<a href="#" class="text-danger btn-del-task fw-bolder ic-func" data-task-id="{{ todoTask.0 }}"><i class="bi bi-trash"></i></a>
