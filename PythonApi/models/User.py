@@ -1,6 +1,5 @@
-class UserModel:
-    def __init__(self, name:str, email:str, username:str, password:str, phoneNumber:str, address:str):
-        super().__init__(name, email, username, password, phoneNumber, address)
+class UserModel():
+    def __init__(self, name:str, email:str = None, username:str = None, password:str = None, phoneNumber:str = None, address:str = None):
         self.name = name
         self.email = email
         self.username = username

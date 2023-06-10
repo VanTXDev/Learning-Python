@@ -13,3 +13,11 @@ class IUserDbMethods(ABC):
     @abstractmethod
     def login (self, username, password):
         pass
+
+    @abstractmethod
+    def put (self, user):
+        pass
+
+    @abstractmethod
+    def get_user_by_name (self, name):
+        pass
