@@ -2,7 +2,7 @@ import random
 
 def continue_playing():
 	print ("----------------------------------------------------------------")
-	print ("Chơi nữa không")
+	print ("Chơi nữa không?")
 	print ("0 => Nghĩ")
 	print ("1 => Chơi")
 	continuous = input()
